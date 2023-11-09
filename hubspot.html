@@ -6,8 +6,6 @@
   <body>
     <h1>HUBSPOT LANDING</h1>
 
-    <iframe id="embedded-apply-form-iframe" src="http://localhost:8002/www.html" height="400" width="400" style="border: 3px solid black"></iframe>
-
     <script type="text/javascript">
       window.addEventListener("message", (event) => {
         if (event.data === "www-ready") {
@@ -25,5 +23,9 @@
         }
       });
     </script>
+
+
+    <!-- NOTE(ssaunier): we load the iframe **after** having registered the `message` event listener -->
+    <iframe id="embedded-apply-form-iframe" src="http://localhost:8002/www.html" height="400" width="400" style="border: 3px solid black"></iframe>
   </body>
 </html>
