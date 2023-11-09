@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IFRAME</title>
+    <style>
+      body {
+        background-color: #eee;
+      }
+      div > div {
+        margin-bottom: 0.8em;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>WWW APPLY FORM</h2>
+
+    <div>
+      <div><label>utm_source</label><br><input type="text" id="utm_source"></div>
+      <div><label>utm_medium</label><br><input type="text" id="utm_medium"></div>
+      <div><label>utm_campaign</label><br><input type="text" id="utm_campaign"></div>
+      <div><label>utm_term</label><br><input type="text" id="utm_term"></div>
+      <div><label>utm_content</label><br><input type="text" id="utm_content"></div>
+    </div>
+
+    <script type="text/javascript">
+      window.addEventListener("message", function(event) {
+        console.log(event);
+        if (event.origin === "http://localhost:8001") {
+          for (const [key, value] of Object.entries(event.data)) {
+            document.getElementById(key).value = value;
+          }
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", function() {
+        const parent = window.parent;
+        if (parent === null) {
+          return; // We are not embedded as an <iframe />
+        }
+
+        parent.postMessage("www-ready", "*");
+      });
+    </script>
+  </body>
+</html>

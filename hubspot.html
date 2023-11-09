@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HUBSPOT LANDING</title>
+  </head>
+  <body>
+    <h1>HUBSPOT LANDING</h1>
+
+    <iframe id="embedded-apply-form-iframe" src="http://localhost:8002/www.html" height="400" width="400" style="border: 3px solid black"></iframe>
+
+    <script type="text/javascript">
+      window.addEventListener("message", (event) => {
+        if (event.data === "www-ready") {
+          const params = new URLSearchParams(window.location.search);
+          var utmParams = {
+            utm_source: params.get("utm_source"),
+            utm_medium: params.get("utm_medium"),
+            utm_campaign: params.get("utm_campaign"),
+            utm_term: params.get("utm_term"),
+            utm_content: params.get("utm_content")
+          };
+
+          const iframe = document.getElementById("embedded-apply-form-iframe")
+          iframe.contentWindow.postMessage(utmParams, "*")
+        }
+      });
+    </script>
+  </body>
+</html>
