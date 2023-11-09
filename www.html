@@ -24,8 +24,10 @@
 
     <script type="text/javascript">
       window.addEventListener("message", function(event) {
-        for (const [key, value] of Object.entries(event.data)) {
-          document.getElementById(key).value = value;
+        if (event.data && event.data.type === "utm") {
+          for (const [key, value] of Object.entries(event.data.params)) {
+            document.getElementById(key).value = value;
+          }
         }
       });
 

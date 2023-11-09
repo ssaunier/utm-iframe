@@ -21,7 +21,7 @@
           };
 
           const iframe = document.getElementById("embedded-apply-form-iframe")
-          iframe.contentWindow.postMessage(utmParams, "*")
+          iframe.contentWindow.postMessage({type: "utm", params: utmParams}, "*")
         }
       });
     </script>
