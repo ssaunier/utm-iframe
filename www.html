@@ -24,21 +24,15 @@
 
     <script type="text/javascript">
       window.addEventListener("message", function(event) {
-        console.log(event);
-        if (event.origin === "http://localhost:8001") {
-          for (const [key, value] of Object.entries(event.data)) {
-            document.getElementById(key).value = value;
-          }
+        for (const [key, value] of Object.entries(event.data)) {
+          document.getElementById(key).value = value;
         }
       });
 
       document.addEventListener("DOMContentLoaded", function() {
-        const parent = window.parent;
-        if (parent === null) {
-          return; // We are not embedded as an <iframe />
+        if (window.parent !== window) {
+          window.parent.postMessage("www-ready", "*");
         }
-
-        parent.postMessage("www-ready", "*");
       });
     </script>
   </body>
